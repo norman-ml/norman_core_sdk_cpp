@@ -1,6 +1,9 @@
 {
-  "name": "norman-core-sdk",
+  "name": "normancoresdk",
   "version-string": "1.0.0",
+  "description": "C++ SDK Norman AI model",
+  "homepage": "https://github.com/norman-ml/norman_core_sdk_cpp",
+  "license": "Apache-2.0",
   "dependencies": [
     "cpr",
     "fmt",
