@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(NormanCoreSdk LANGUAGES CXX)
+project(NormanCoreSdk VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -12,26 +12,49 @@ find_package(nlohmann_json CONFIG REQUIRED)
 # Collect all source files recursively
 file(GLOB_RECURSE SRC_FILES "src/*.cpp")
 
+add_library(normancoresdk ${SRC_FILES})
 
-# Build target
-add_executable(NormanCoreSdk main.cpp ${SRC_FILES})
-
-# Public include path points to "include"
-target_include_directories(NormanCoreSdk
+target_include_directories(normancoresdk
     PUBLIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
 )
 
-# Link dependencies
-target_link_libraries(NormanCoreSdk
-    PRIVATE
+
+target_link_libraries(normancoresdk
+    PUBLIC
         fmt::fmt
         cpr::cpr
         nlohmann_json::nlohmann_json
 )
 
-# (Optional) Set output folders
-set_target_properties(NormanCoreSdk PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY_DEBUG   ${CMAKE_SOURCE_DIR}/bin/Debug
-    RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_SOURCE_DIR}/bin/Release
+install(TARGETS normancoresdk
+        EXPORT normancoresdkTargets
+        ARCHIVE DESTINATION lib
+        LIBRARY DESTINATION lib
+        RUNTIME DESTINATION bin
+        INCLUDES DESTINATION include)
+
+install(DIRECTORY include/ DESTINATION include)
+
+install(EXPORT normancoresdkTargets
+        FILE normancoresdkTargets.cmake
+        NAMESPACE norman::
+        DESTINATION share/normancoresdk)
+
+include(CMakePackageConfigHelpers)
+write_basic_package_version_file(
+    "${CMAKE_CURRENT_BINARY_DIR}/normancoresdkConfigVersion.cmake"
+    COMPATIBILITY SameMajorVersion
 )
+
+configure_package_config_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/normancoresdkConfig.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/normancoresdkConfig.cmake"
+    INSTALL_DESTINATION share/normancoresdk
+)
+
+install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/normancoresdkConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/normancoresdkConfigVersion.cmake"
+    DESTINATION share/normancoresdk)
