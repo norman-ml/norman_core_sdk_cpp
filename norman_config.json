@@ -1,0 +1,3 @@
+{
+    "baseUrl": "https://api.<environment>.<sandbox>.public.norman-ai.com/v0/"
+}

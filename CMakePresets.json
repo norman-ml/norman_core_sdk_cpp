@@ -1,0 +1,35 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "default",
+            "displayName": "Default build using vcpkg + MSVC",
+            "description": "Configure project with vcpkg toolchain for MSVC 2022",
+            "generator": "Visual Studio 17 2022",
+            "binaryDir": "${sourceDir}/build",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_TOOLCHAIN_FILE": "D:/Norman/norman_core_sdk_vc/vcpkg/scripts/buildsystems/vcpkg.cmake",
+                "VCPKG_TARGET_TRIPLET": "x64-windows"
+            }
+        },
+        {
+            "name": "Configure preset using toolchain file",
+            "displayName": "Configure preset using toolchain file",
+            "description": "Sets Ninja generator, build and install directory",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_TOOLCHAIN_FILE": "",
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/out/install/${presetName}"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "default",
+            "configurePreset": "default"
+        }
+    ]
+}

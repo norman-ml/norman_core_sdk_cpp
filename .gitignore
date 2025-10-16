@@ -39,3 +39,10 @@
 
 # debug information files
 *.dwo
+
+build/
+.vs/
+.vscode/
+vcpkg_installed/
+bin/
+out/

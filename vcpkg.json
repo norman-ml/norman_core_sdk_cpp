@@ -1,0 +1,9 @@
+{
+  "name": "norman-core-sdk",
+  "version-string": "1.0.0",
+  "dependencies": [
+    "cpr",
+    "fmt",
+    "nlohmann-json"
+  ]
+}
