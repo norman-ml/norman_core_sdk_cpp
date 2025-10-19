@@ -13,7 +13,7 @@ namespace norman::objects::shared::accounts {
 
 		Account(const std::string& id, const std::string& name, const std::string& creation_time);
 		Account(const nlohmann::json& json);
-		std::string Account::toString() const;
+		std::string toString() const;
 
 		Account() = default;
 		~Account() = default;

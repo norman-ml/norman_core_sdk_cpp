@@ -45,6 +45,5 @@ namespace norman::clients
                                const std::string &endpoint,
                                const std::string &token,
                                const nlohmann::json &jsonBody) const;
-    } const;
-
+    };
 }
