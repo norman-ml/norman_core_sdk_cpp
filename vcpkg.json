@@ -1,12 +1,20 @@
 {
   "name": "normancoresdk",
-  "version-string": "1.0.0",
-  "description": "C++ SDK Norman AI model",
+  "version-string": "0.0.1",
+  "description": "C++ SDK for the Norman AI model",
   "homepage": "https://github.com/norman-ml/norman_core_sdk_cpp",
   "license": "Apache-2.0",
   "dependencies": [
     "cpr",
     "fmt",
-    "nlohmann-json"
+    "nlohmann-json",
+    {
+      "name": "vcpkg-cmake",
+      "host": true
+    },
+    {
+      "name": "vcpkg-cmake-config",
+      "host": true
+    }
   ]
 }
